@@ -1,0 +1,27 @@
+{
+  "name": "github-avatar-downloader",
+  "version": "1.0.0",
+  "description": "download avatar from GitHub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valeriakozlova/github-avatar-downloader.git"
+  },
+  "keywords": [
+    "gitHub",
+    "avatar",
+    "download"
+  ],
+  "author": "Valeria Kozlova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/valeriakozlova/github-avatar-downloader/issues"
+  },
+  "homepage": "https://github.com/valeriakozlova/github-avatar-downloader#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
