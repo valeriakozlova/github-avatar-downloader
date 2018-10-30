@@ -1,6 +1,11 @@
+var args = process.argv.slice(2);
+var owner = args[0].toString();
+var repo = args[1].toString();
+
 var request = require('request');
 var token = require('./secrets');
 var fs = require('fs');
+
 
 function downloadImageByURL(url, filePath) {
 
@@ -27,7 +32,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
 }
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(owner, repo, function(err, result) {
   console.log("Errors:", err);
   var listOfObejects = JSON.parse(result);
   for (var i = 0; i < listOfObejects.length; i++) {
