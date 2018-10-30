@@ -1,21 +1,20 @@
-var args = process.argv.slice(2);
-var owner = args[0].toString();
-var repo = args[1].toString();
-
 var request = require('request');
 var token = require('./secrets');
 var fs = require('fs');
+var dir = "./avatars";
 
+var args = process.argv.slice(2);
+
+if (args.length < 2) {
+  console.log("Error, please include owner name and repo name");
+} else {
+
+var owner = args[0].toString();
+var repo = args[1].toString();
 
 function downloadImageByURL(url, filePath) {
 
   request.get(url)
-         .on('error', function (err) {
-           throw err;
-         })
-         .on('response', function (response) {
-           console.log('Response: ', response.statusCode,);
-         })
          .pipe(fs.createWriteStream(filePath));
 }
 
@@ -32,13 +31,21 @@ function getRepoContributors(repoOwner, repoName, cb) {
   });
 }
 
+
 getRepoContributors(owner, repo, function(err, result) {
-  console.log("Errors:", err);
+  if (err) {
+    console.log("Error:", err);
+  }
   var listOfObejects = JSON.parse(result);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
+  }
   for (var i = 0; i < listOfObejects.length; i++) {
-    downloadImageByURL(listOfObejects[i]["avatar_url"],`avatars/${listOfObejects[i]["login"]}.jpg`)
+
+    downloadImageByURL(listOfObejects[i]["avatar_url"],`${dir}/${listOfObejects[i]["login"]}.jpg`)
   }
 });
 
+}
 
 
